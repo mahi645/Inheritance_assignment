@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.axis.exception.IDNotFoundException;
+import com.axis.exception.InValidPriceException;
 import com.axis.model.Product;
 import com.axis.repository.ProductRepository;
 
@@ -17,6 +18,9 @@ public class PoductServiceImpl implements ProductService {
 	
 	@Override
 	public Product addProduct(Product product) {
+		if(product.getPrice()<=0)
+			throw new InValidPriceException("minimum price should be 1");
+		
 		return productRepository.save(product);
 	}
 
