@@ -58,5 +58,11 @@ public class DoctorServiceimpl implements DoctorService {
 		return AppConstant.DeleteMessage;
 	}
 
+	@Override
+	public List<Doctor> findByName(String name) {
+		// TODO Auto-generated method stub
+		return doctorRepository.findByName(name);
+	}
+
 	
 }

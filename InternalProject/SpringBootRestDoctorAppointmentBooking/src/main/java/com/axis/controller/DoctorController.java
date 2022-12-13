@@ -24,7 +24,7 @@ public class DoctorController {
 	@Autowired 
 	DoctorService doctorService;
 	
-	@PostMapping()
+	@PostMapping("/doctor")
 	public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor){
 		Doctor doctor1=doctorService.addDoctor(doctor);
 		return new ResponseEntity<Doctor>(doctor1,HttpStatus.OK);
@@ -47,9 +47,14 @@ public class DoctorController {
 		Doctor doctor1=doctorService.updateDoctorById(id, doctor);
 		return new ResponseEntity<Doctor>(doctor1,HttpStatus.OK);
 	}
-	@DeleteMapping("/docctor/{id}")
+	@DeleteMapping("/doctor/{id}")
 	public ResponseEntity<String> deleteDoctorById(@PathVariable int id){
 		
 		return new ResponseEntity<String>(doctorService.deleteDoctor(id),HttpStatus.OK);
+	}
+	@GetMapping("/doctors/{name}")
+	public ResponseEntity<List<Doctor>> findByName(@PathVariable String name){
+		List<Doctor> doctor=doctorService.findByName(name);
+		return new ResponseEntity<List<Doctor>>(doctor,HttpStatus.OK);
 	}
 }
